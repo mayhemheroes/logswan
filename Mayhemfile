@@ -1,0 +1,7 @@
+project: logswan
+target: logswan-fuzz
+
+
+cmds:
+  - cmd: /logswan-instrumented -g @@
+    afl: true

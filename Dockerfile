@@ -1,5 +1,5 @@
 # Build Stage
-FROM aflplusplus/aflplusplus as builder
+FROM fuzzers/aflplusplus:3.12c as builder
 
 ## Install build dependencies.
 RUN apt-get update && \
@@ -36,9 +36,7 @@ RUN cp `ldd /usr/local/bin/afl-fuzz | grep so | sed -e '/^[^\t]/ d' | sed -e 's/
 
 ## Package Stage
 
-FROM --platform=linux/amd64 ubuntu:20.04
-RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y libc6
+FROM --platform=linux/amd64 ubuntu:22.04
 COPY --from=builder /usr/local/share/dbip /usr/local/share/dbip
 COPY --from=builder /usr/local/bin/afl-fuzz /afl-fuzz
 COPY --from=builder /logswan/build/logswan /logswan-instrumented

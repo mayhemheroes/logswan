@@ -13,9 +13,9 @@ WORKDIR /logswan
 
 # Set up GEOIP2 Database
 WORKDIR /
-RUN wget https://download.db-ip.com/free/dbip-country-lite-2022-05.mmdb.gz
+RUN wget http://netbsd.ftp.fu-berlin.de/pub/NetBSD/pkgsrc/packages/NetBSD/aarch64/9.1/All/dbip-country-lite-2022.06.tgz
 RUN mkdir -p /usr/local/share/dbip
-RUN gunzip /dbip-country-lite-2022-05.mmdb.gz && mv /dbip-country-lite-2022-05.mmdb /usr/local/share/dbip/dbip-country-lite.mmdb
+RUN tar xvzf /dbip-country-lite-2022.06.tgz && mv /share/dbip/dbip-country-lite.mmdb /usr/local/share/dbip/dbip-country-lite.mmdb
 
 ## Build
 WORKDIR /logswan

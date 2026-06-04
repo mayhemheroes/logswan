@@ -12,9 +12,8 @@ WORKDIR /logswan
 
 
 # Set up GEOIP2 Database
-WORKDIR /
- && \
-    wget -q https://download.db-ip.com/free/dbip-country-lite-2026-05.mmdb.gz -O /tmp/dbip.mmdb.gz && \
+RUN mkdir -p /usr/local/share/dbip && \
+    wget -q "https://download.db-ip.com/free/dbip-country-lite-$(date +%Y-%m).mmdb.gz" -O /tmp/dbip.mmdb.gz && \
     gunzip -c /tmp/dbip.mmdb.gz > /usr/local/share/dbip/dbip-country-lite.mmdb && \
     rm /tmp/dbip.mmdb.gz
 

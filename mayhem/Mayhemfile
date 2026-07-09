@@ -1,0 +1,12 @@
+# Mayhem target: the logswan binary itself (file-input log parser), built with ASan+UBSan.
+# GeoIP lookups are enabled (-g) against the repo's own test database so the geolocation code
+# paths are fuzzed too, matching the original integration's `/logswan-instrumented -g @@`.
+project: logswan
+target: logswan-fuzz
+
+cmds:
+  - cmd: /mayhem/logswan-fuzz -g -d /mayhem/tests/logswan.mmdb @@  # mayhem-lint: ok-image-path
+
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/logswan-fuzz/testsuite
